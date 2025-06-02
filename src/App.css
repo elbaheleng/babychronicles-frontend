@@ -1,0 +1,10 @@
+#heromd{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5)), url("/hero_md.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#herosm{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5)), url("/hero_sm.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
