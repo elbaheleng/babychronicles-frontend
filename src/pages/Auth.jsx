@@ -8,10 +8,15 @@ import { GlobalStyles } from '@mui/material';
 import { amber } from '@mui/material/colors';
 import { toast } from 'react-toastify';
 import { loginApi, registerApi } from '../services/allApis';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Auth({ register }) {
     const navigate = useNavigate()
+    const [hiddenpasswd1, sethiddenpasswd1] = useState("password")
+    const [hiddenpasswd2, sethiddenpasswd2] = useState("password")
+    const [validEmail, setvalidEmail] = useState(true)
     const [registrationDetails, setRegistrationDetails] = useState({
         fullname: "",
         email: "",
@@ -23,11 +28,20 @@ function Auth({ register }) {
     })
 
     // console.log(registrationDetails);
+// function to check validity of email
+    const checkValidity = (e) => {
+        setRegistrationDetails({ ...registrationDetails, email: e.target.value })
+        if (!!e.target.value.match('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')) { // regex for email
+            setvalidEmail(true)
+        } else {
+            setvalidEmail(false)
+        }
 
+    }
     //function to handle register
     const handleRegister = async () => {
         const { fullname, email, password, cpassword, dob, gender, babyname } = registrationDetails
-        
+
         if (!fullname || !email || !password || !cpassword || !dob || !gender) {
             toast.warning("Please fill all fields.")
         } else {
@@ -35,81 +49,81 @@ function Auth({ register }) {
                 toast.warning("Passwords entered doesnot match.")
             } else {
                 const dob1 = dob.format('YYYY-MM-DD')
-                if (babyname == ''){
-                    const babyname1 ="Your baby"
-                    const result = await registerApi({ fullname, email, password, dob:dob1, gender, name: babyname1 }) // the keys should be same as that of backend, key value pair same, so only one
-                if (result.status == 200) {
-                    toast.success("Registration Successful. Please Login")
-                    setRegistrationDetails({
-                        fullname: "",
-                        email: "",
-                        password: "",
-                        cpassword: "",
-                        dob: dayjs(),
-                        gender: "",
-                        babyname: "Your baby"
-                    })
-                    navigate('/login')
-                } else if (result.status == 409) {
-                    toast.warning("User already exists. Please Login") // respose data is in backed as ""
-                    setRegistrationDetails({
-                        fullname: "",
-                        email: "",
-                        password: "",
-                        cpassword: "",
-                        dob: dayjs(),
-                        gender: "",
-                        babyname: "Your baby"
-                    })
+                if (babyname == '') {
+                    const babyname1 = "Your baby"
+                    const result = await registerApi({ fullname, email, password, dob: dob1, gender, name: babyname1 }) // the keys should be same as that of backend, key value pair same, so only one
+                    if (result.status == 200) {
+                        toast.success("Registration Successful. Please Login")
+                        setRegistrationDetails({
+                            fullname: "",
+                            email: "",
+                            password: "",
+                            cpassword: "",
+                            dob: dayjs(),
+                            gender: "",
+                            babyname: "Your baby"
+                        })
+                        navigate('/login')
+                    } else if (result.status == 409) {
+                        toast.warning("User already exists. Please Login") // respose data is in backed as ""
+                        setRegistrationDetails({
+                            fullname: "",
+                            email: "",
+                            password: "",
+                            cpassword: "",
+                            dob: dayjs(),
+                            gender: "",
+                            babyname: "Your baby"
+                        })
+                    } else {
+                        toast.error("Something went wrong!")
+                        setRegistrationDetails({
+                            fullname: "",
+                            email: "",
+                            password: "",
+                            cpassword: "",
+                            dob: dayjs(),
+                            gender: "",
+                            babyname: "Your baby"
+                        })
+                    }
                 } else {
-                    toast.error("Something went wrong!")
-                    setRegistrationDetails({
-                        fullname: "",
-                        email: "",
-                        password: "",
-                        cpassword: "",
-                        dob: dayjs(),
-                        gender: "",
-                        babyname: "Your baby"
-                    })
+                    const result = await registerApi({ fullname, email, password, dob: dob1, gender, name: babyname }) // the keys should be same as that of backend, key value pair same, so only one
+                    if (result.status == 200) {
+                        toast.success("Registration Successful. Please Login")
+                        setRegistrationDetails({
+                            fullname: "",
+                            email: "",
+                            password: "",
+                            cpassword: "",
+                            dob: dayjs(),
+                            gender: ""
+                        })
+                        navigate('/login')
+                    } else if (result.status == 409) {
+                        toast.warning("User already exists. Please Login") // respose data is in backed as ""
+                        setRegistrationDetails({
+                            fullname: "",
+                            email: "",
+                            password: "",
+                            cpassword: "",
+                            dob: dayjs(),
+                            gender: "",
+                            babyname: "Your baby"
+                        })
+                    } else {
+                        toast.error("Something went wrong!")
+                        setRegistrationDetails({
+                            fullname: "",
+                            email: "",
+                            password: "",
+                            cpassword: "",
+                            dob: dayjs(),
+                            gender: ""
+                        })
+                    }
                 }
-                } else {
-                    const result = await registerApi({ fullname, email, password, dob:dob1, gender, name: babyname }) // the keys should be same as that of backend, key value pair same, so only one
-                if (result.status == 200) {
-                    toast.success("Registration Successful. Please Login")
-                    setRegistrationDetails({
-                        fullname: "",
-                        email: "",
-                        password: "",
-                        cpassword: "",
-                        dob: dayjs(),
-                        gender: ""
-                    })
-                    navigate('/login')
-                } else if (result.status == 409) {
-                    toast.warning("User already exists. Please Login") // respose data is in backed as ""
-                    setRegistrationDetails({
-                        fullname: "",
-                        email: "",
-                        password: "",
-                        cpassword: "",
-                        dob: dayjs(),
-                        gender: "",
-                        babyname: "Your baby"
-                    })
-                } else {
-                    toast.error("Something went wrong!")
-                    setRegistrationDetails({
-                        fullname: "",
-                        email: "",
-                        password: "",
-                        cpassword: "",
-                        dob: dayjs(),
-                        gender: ""
-                    })
-                }
-                }
-                
+
             }
         }
     }
@@ -126,8 +140,8 @@ function Auth({ register }) {
                 sessionStorage.setItem("existingUser", JSON.stringify(result.data.existingUser))
                 sessionStorage.setItem("token", result.data.token)
                 setTimeout(() => {
-                    if (result.data.existingUser.email == 'bookstoreadmin@gmail.com') {
-                        navigate('/admin-home')
+                    if (result.data.existingUser.email == 'admin@bc.com') {
+                        navigate('/admin_home')
                     } else {
                         navigate('/dashboard')
                     }
@@ -152,7 +166,7 @@ function Auth({ register }) {
                     cpassword: "",
                     dob: dayjs(),
                     gender: "",
-                    babyname : "Your baby"
+                    babyname: "Your baby"
                 })
             }
 
@@ -175,13 +189,13 @@ function Auth({ register }) {
                             <input type="text" value={registrationDetails.fullname} onChange={(e) => setRegistrationDetails({ ...registrationDetails, fullname: e.target.value })} placeholder='Full Name' className='bg-white rounded py-2 ps-2 w-full' />
                         </div>}
                         <div className={register ? 'px-8 pb-5' : 'px-8 py-5'}>
-                            <input type="text" value={registrationDetails.email} onChange={(e) => setRegistrationDetails({ ...registrationDetails, email: e.target.value })} placeholder='Email Address' className='bg-white rounded py-2 ps-2 w-full' />
+                            <input type="text" value={registrationDetails.email} onChange={(e) => checkValidity(e)} placeholder='Email Address' className='bg-white rounded py-2 ps-2 w-full' /> {!validEmail && <span className='text-red-600 ms-3'>*Invalid Input</span>}
                         </div>
                         <div className='px-8 pb-5'>
-                            <input type="text" value={registrationDetails.password} onChange={(e) => setRegistrationDetails({ ...registrationDetails, password: e.target.value })} placeholder='Password' className='bg-white rounded py-2 ps-2 w-full' />
+                            <input type={hiddenpasswd1} value={registrationDetails.password} onChange={(e) => setRegistrationDetails({ ...registrationDetails, password: e.target.value })} placeholder='Password' className='bg-white rounded py-2 ps-2 w-full' />{hiddenpasswd1 == "password" ? <FontAwesomeIcon onClick={() => sethiddenpasswd1("text")} icon={faEye} style={{ marginLeft: "-30px", color: "gray" }} /> : <FontAwesomeIcon onClick={() => sethiddenpasswd1("password")} icon={faEyeSlash} style={{ marginLeft: "-30px", color: "gray" }} />}
                         </div>
                         {register && <div className='px-8 pb-5'>
-                            <input type="text" value={registrationDetails.cpassword} onChange={(e) => setRegistrationDetails({ ...registrationDetails, cpassword: e.target.value })} placeholder='Confirm Password' className='bg-white rounded py-2 ps-2 w-full' />
+                            <input type={hiddenpasswd2} value={registrationDetails.cpassword} onChange={(e) => setRegistrationDetails({ ...registrationDetails, cpassword: e.target.value })} placeholder='Confirm Password' className='bg-white rounded py-2 ps-2 w-full' />{hiddenpasswd2 == "password" ? <FontAwesomeIcon onClick={() => sethiddenpasswd2("text")} icon={faEye} style={{ marginLeft: "-30px", color: "gray" }} /> : <FontAwesomeIcon onClick={() => sethiddenpasswd2("password")} icon={faEyeSlash} style={{ marginLeft: "-30px", color: "gray" }} />}
                         </div>}
                         {register && <div className='grid grid-cols-2 ms-8 gap-4 mb-5'>
                             <div>
@@ -250,8 +264,8 @@ function Auth({ register }) {
                             <button onClick={handleLogin} className='bg-rose-700 text-white px-3 py-1 rounded mb-5'>LOGIN</button>
                         </div>}
                     </div>
-                    {register && <p className='text-center my-2'>Already a User? Login.</p>}
-                    {!register && <p className='text-center my-2'>Are you a new User? Register.</p>}
+                    {register && <p className='text-center my-2'>Already a User? <Link to={'/login'} className='text-blue-600'>Login</Link>.</p>}
+                    {!register && <p className='text-center my-2'>Are you a new User? <Link to={'/register'} className='text-blue-600'>Register</Link>.</p>}
 
                 </div>
                 <div className='mt-5 text-center'>

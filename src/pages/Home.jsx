@@ -61,7 +61,7 @@ function Home() {
 
             </div>
             {/* Testimonials */}
-            <div>
+            <div id='testimonials'>
                 <h1 className='text-center text-3xl my-5'>Testimonials</h1>
                 <div className='md:grid grid-cols-[2fr_1fr] my-5'>
                     <div className='text-center md:hidden mb-3'>
@@ -78,9 +78,9 @@ function Home() {
                 </div>
             </div>
             {/* About Us */}
-            <div className='bg-amber-200 p-5'>
+            <div id='about' className='bg-pink-600 text-white p-5'>
                 <h1 className='text-center text-3xl my-5'>About Us</h1>
-                <div className='md:px-20 px-10 text-justify '>
+                <div className='md:px-20 px-10 text-justify my-8 '>
                     <p className='mb-3'>Hi, I'm Elba Helen George, the creator of BabyChronicles.</p>
                     <p className='mb-3'>This app is inspired by my own journey into motherhood. As a new mom, I found it incredibly challenging to keep track of my baby's needs — from feeding times and sleep schedules to diaper changes and medical details. Night feeds were especially exhausting, and without external help, remembering everything felt overwhelming.Recovering from a C-section while managing a newborn only added to the stress. I realized how much easier it would be if there was a simple, supportive tool to log all these daily activities in one place.</p>
                     <p className='mb-3'>That’s why I created BabyChronicles — to help parents and caregivers stay organized and feel more in control during those precious but demanding early months.Later, when I had to rejoin work, I felt even more strongly about the need for such a tool. If this app makes life even a little easier for another parent, I’ll consider it a success.</p>
@@ -114,7 +114,7 @@ function Home() {
                         <p className='text-2xl my-3'>Price: ₹2999 one-time</p>
                     </div>
                 </div>
-                <h1 className='text-center text-3xl my-5 text-amber-800'>Introductory Offer: Lifetime Plan Free for all users</h1>
+                <h1 className='text-center font-bold text-3xl my-5 text-pink-800'>Introductory Offer: Lifetime Plan Free for all users</h1>
 
 
             </div>

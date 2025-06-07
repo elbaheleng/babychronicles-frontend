@@ -11,6 +11,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { toast } from 'react-toastify';
 import { addBabyStatusContext, babyContext } from '../context/Contexttoshare';
+import { Link } from 'react-router-dom';
 
 
 function Buttonstackdashboard() {
@@ -115,16 +116,16 @@ function Buttonstackdashboard() {
                 <button className='bg-amber-200 px-3 py-0.5 rounded'>Charts</button>
             </div>
             <div className='m-2'>
-                <button className='bg-amber-200 px-3 py-0.5 rounded'>Upload Photos</button>
+               <Link to={'/imagegallery'}> <button className='bg-amber-200 px-3 py-0.5 rounded'>Image Gallery</button></Link>
             </div>
             <div className='m-2'>
                 <button type='button' onClick={() => setModalEditBaby(true)} className='bg-amber-200 px-3 py-0.5 rounded'>Edit Baby</button>
             </div>
             <div className='m-2'>
-                <button className='bg-amber-200 px-3 py-0.5 rounded'>Delete Baby</button>
+                <button type='button' onClick={() => setModalAddBaby(true)} className='bg-amber-200 px-3 py-0.5 rounded'>Add Baby </button>
             </div>
             <div className='m-2'>
-                <button type='button' onClick={() => setModalAddBaby(true)} className='bg-amber-200 px-3 py-0.5 rounded'>Add Baby </button>
+                <Link to={'/store'}><button className='bg-amber-200 px-3 py-0.5 rounded'>Store</button></Link>
             </div>
             {modalAddBaby &&
                 <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

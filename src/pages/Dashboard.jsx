@@ -13,7 +13,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { addBreastfeedingApi, getAllBabiesByUserApi } from '../services/allApis';
+import { addBathApi, addBottlefeedApi, addBreastfeedingApi, addDiaperchangeApi, addHealthApi, addMilestoneApi, addPlaytimeApi, addPottytimeApi, addPumpingApi, addSleepApi, getAllBabiesByUserApi } from '../services/allApis';
 
 //extensions for age calculation
 import duration from 'dayjs/plugin/duration';
@@ -23,6 +23,8 @@ import timezone from 'dayjs/plugin/timezone';
 import Buttonstackdashboard from '../components/Buttonstackdashboard';
 import { addBabyStatusContext, babyContext } from '../context/Contexttoshare';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import Highlights from '../components/Highlights';
 
 dayjs.extend(duration);
 dayjs.extend(utc);
@@ -30,8 +32,8 @@ dayjs.extend(timezone);
 
 
 function Dashboard() {
-  const { addBabyStatus, setAddBabyStatus} = useContext(addBabyStatusContext)
-  const { baby, setBaby} = useContext(babyContext)
+  const { addBabyStatus, setAddBabyStatus } = useContext(addBabyStatusContext)
+  const { baby, setBaby } = useContext(babyContext)
   //states
   const [modalBreastfeeding, setModalBreastfeeding] = useState(false)
   const [modalBottlefeed, setModalBottlefeed] = useState(false)
@@ -105,10 +107,11 @@ function Dashboard() {
   })
   const [healthDetails, setHealthDetails] = useState({
     date: dayjs(),
+    time: dayjs(),
     type: "",
     description: ""
   })
- 
+
   //console.log(breastfeedingDetails);
   //console.log(bottlefeedDetails);
   //console.log(diaperchangeDetails);
@@ -119,7 +122,7 @@ function Dashboard() {
   //console.log(bathDetails);
   //console.log(milestoneDetails);
   //console.log(healthDetails);
-  
+
 
 
 
@@ -194,7 +197,7 @@ function Dashboard() {
     setModalHealth(false)
     handleHealthReset()
   }
-  
+
   //to reset modals-----------------------------------------------
   const handleBreastfeedingReset = () => {
     setBreastfeedingDetails({
@@ -272,19 +275,22 @@ function Dashboard() {
   const handleHealthReset = () => {
     setHealthDetails({
       date: dayjs(),
+      time: dayjs(),
       type: "",
       description: ""
     })
   }
-  
+
+
+
   //to submit activities
-  const handleBreastfeedingSubmit = async() => {
-    const {date, starttime, endtime, duration, side} = breastfeedingDetails
-    const {_id} = baby
-    console.log(date, starttime, endtime, duration, side,_id);
-    
-    const result = await addBreastfeedingApi({babyid:_id, date, starttime, endtime, duration, side})
-    if(result.status==200){
+  const handleBreastfeedingSubmit = async () => {
+    const { date, starttime, endtime, duration, side } = breastfeedingDetails
+    const { _id } = baby
+    //console.log(date, starttime, endtime, duration, side,_id);
+
+    const result = await addBreastfeedingApi({ babyid: _id, date, starttime, endtime, duration, side })
+    if (result.status == 200) {
       toast.success("Breastfeeding log added.")
       closeBreastfeedingModal()
     } else {
@@ -292,36 +298,128 @@ function Dashboard() {
       closeBreastfeedingModal()
     }
   }
-  const handleBottlefeedSubmit = () => {
-    setModalBottlefeed(false)
+  const handleBottlefeedSubmit = async () => {
+    const { date, time, type, quantity } = bottlefeedDetails
+    const { _id } = baby
+
+    const result = await addBottlefeedApi({ babyid: _id, date, time, type, quantity })
+    if (result.status == 200) {
+      toast.success("Bottle feed log added.")
+      closeBottlefeedModal()
+    } else {
+      toast.error("Something went wrong")
+      closeBottlefeedModal()
+    }
   }
-  const handleDiaperChangeSubmit = () => {
-    setModalDiaperchange(false)
+  const handleDiaperChangeSubmit = async () => {
+    const { date, time, type } = diaperchangeDetails
+    const { _id } = baby
+
+    const result = await addDiaperchangeApi({ babyid: _id, date, time, type })
+    if (result.status == 200) {
+      toast.success("Diaper change log added.")
+      closeDiaperchangeModal()
+    } else {
+      toast.error("Something went wrong")
+      closeDiaperchangeModal()
+    }
   }
-  const handleSleepSubmit = () => {
-    setModalSleep(false)
+  const handleSleepSubmit = async () => {
+    const { date, starttime, endtime, duration } = sleepDetails
+    const { _id } = baby
+
+    const result = await addSleepApi({ babyid: _id, date, starttime, endtime, duration })
+    if (result.status == 200) {
+      toast.success("Sleep log added.")
+      closeSleepModal()
+    } else {
+      toast.error("Something went wrong")
+      closeSleepModal()
+    }
   }
-  const handlePumpingSubmit = () => {
-    setModalPumping(false)
+  const handlePumpingSubmit = async () => {
+    const usermail = userDetails.email
+    const { date, starttime, endtime, duration, side, quantity } = pumpingDetails
+
+    const result = await addPumpingApi({ date, starttime, endtime, duration, side, quantity, usermail })
+    if (result.status == 200) {
+      toast.success("Pumping log added.")
+      closePumpingModal()
+    } else {
+      toast.error("Something went wrong")
+      closePumpingModal()
+    }
   }
-  const handlePottytimeSubmit = () => {
-    setModalPottytime(false)
+  const handlePottytimeSubmit = async () => {
+    const { date, time, type } = pottytimeDetails
+    const { _id } = baby
+
+    const result = await addPottytimeApi({ babyid: _id, date, time, type })
+    if (result.status == 200) {
+      toast.success("Potty time log added.")
+      closePottytimeModal()
+    } else {
+      toast.error("Something went wrong")
+      closePottytimeModal()
+    }
   }
 
-  const handlePlaytimeSubmit = () => {
-    setModalPlaytime(false)
+  const handlePlaytimeSubmit = async () => {
+    const { date, starttime, endtime, description, duration } = playtimeDetails
+    const { _id } = baby
+
+    const result = await addPlaytimeApi({ babyid: _id, date, starttime, endtime, description, duration })
+    if (result.status == 200) {
+      toast.success("Play time log added.")
+      closePlaytimeModal()
+    } else {
+      toast.error("Something went wrong")
+      closePlaytimeModal()
+    }
   }
-  const handleBathSubmit = () => {
-    setModalBath(false)
+  const handleBathSubmit = async () => {
+    const { date, starttime, endtime, duration } = bathDetails
+    const { _id } = baby
+
+    const result = await addBathApi({ babyid: _id, date, starttime, endtime, duration })
+    if (result.status == 200) {
+      toast.success("Bath log added.")
+      closeBathModal()
+    } else {
+      toast.error("Something went wrong")
+      closeBathModal()
+    }
   }
-  const handleMilestoneSubmit = () => {
-    setModalMilestone(false)
+  const handleMilestoneSubmit = async () => {
+    const { date, description } = milestoneDetails
+    const { _id } = baby
+
+    const result = await addMilestoneApi({ babyid: _id, date, description })
+
+
+    if (result.status == 200) {
+      toast.success("Milestone added.")
+      closeMilestoneModal()
+    } else {
+      toast.error("Something went wrong")
+      closeMilestoneModal()
+    }
   }
-  const handleHealthSubmit = () => {
-    setModalHealth(false)
+  const handleHealthSubmit = async () => {
+    const { date, type, description, time } = healthDetails
+    const { _id } = baby
+
+    const result = await addHealthApi({ babyid: _id, date, type, description, time })
+    if (result.status == 200) {
+      toast.success("Health/Vaccine log added.")
+      closeHealthModal()
+    } else {
+      toast.error("Something went wrong")
+      closeHealthModal()
+    }
   }
 
-  
+
   //to get all babies added by the user
   const getAllBabiesByUser = async (token) => {
     const reqHeader = {
@@ -333,6 +431,7 @@ function Dashboard() {
   }
 
   // console.log(userBabies);
+//console.log(baby);
 
   //to calculate baby's age
   const calculateAge = () => {
@@ -362,8 +461,9 @@ function Dashboard() {
 
   //function to handle baby selection
   const selectBaby = (e) => {
-    setFirstLoad(true)
+    setFirstLoad(false)
     setBaby(e.target.value)
+    localStorage.setItem("baby", JSON.stringify(e.target.value))
   }
 
   useEffect(() => {
@@ -388,13 +488,19 @@ function Dashboard() {
         calculateEndtimeBath()
       }
     }
+    if(!firstLoad){
     calculateAge()
+    }
 
   }, [breastfeedingDetails.duration, sleepDetails.duration, pumpingDetails.duration, playtimeDetails.duration, bathDetails.duration, baby, addBabyStatus])
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
+    if (sessionStorage.getItem("token") && localStorage.getItem("baby")) {
       setFirstLoad(false)
     }
+  }, [])
+  useEffect(() => {
+    const baby1 = JSON.parse(localStorage.getItem("baby"))
+    setBaby(baby1)
   }, [])
   return (
 
@@ -404,7 +510,7 @@ function Dashboard() {
       <div className='flex justify-between items-center'>
         <div>
           <h3 className='text-xl ms-5'>Hello {userDetails.fullname}! </h3>
-          {firstLoad ? <h4 className='ms-5'> {baby.name} is {age} old!</h4> : <h4 className='ms-5'>Please select your baby from dropdown.</h4>}
+          {!firstLoad ? <h4 className='ms-5'> {baby.name} is {age} old!</h4> : <h4 className='ms-5'>Please select your baby from dropdown.</h4>}
         </div>
         <div className='text-end my-5'>
           <p className='me-3'>Choose Baby</p>
@@ -428,77 +534,74 @@ function Dashboard() {
           </Select>
         </div>
       </div>
-      { firstLoad && <p className='ms-5'>Click on the icons to log the activities.</p>}
-      { firstLoad && <div className='md:grid grid-cols-[3fr_1fr]'>
+      {!firstLoad && <p className='ms-5'>Click on the icons to log the activities.</p>}
+      {!firstLoad && <div className='md:grid grid-cols-[3fr_1fr]'>
         <div className='grid md:grid-cols-5 grid-cols-3 my-3'>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalBreastfeeding(true)} style={{ height: "50px" }} src="/mother.png" alt="mother" />
             <p className='font-bold mb-1'>Breastfeeding</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/breastfeeding_log'}><button type='button' className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalBottlefeed(true)} style={{ height: "50px" }} src="/milk-bottle.png" alt="milk bottle" />
             <p className='font-bold mb-1'>Bottle Feed</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/bottlefeed_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalDiaperchange(true)} style={{ height: "50px" }} src="/baby-diaper.png" alt="diaper" />
             <p className='font-bold mb-1'>Diaper Change</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/diaperchange_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalSleep(true)} style={{ height: "50px" }} src="/baby-sleep.png" alt="sleep" />
             <p className='font-bold mb-1'>Sleep</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/sleep_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalPumping(true)} style={{ height: "50px" }} src="/breast-pump.png" alt="pump" />
             <p className='font-bold mb-1'>Pumping</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/pumping'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalPottytime(true)} style={{ height: "50px" }} src="/potty.png" alt="potty" />
             <p className='font-bold mb-1'>Potty Time</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/pottytime_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalBath(true)} style={{ height: "50px" }} src="/baby-bath.png" alt="bath" />
             <p className='font-bold mb-1'>Bath</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/bath_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalPlaytime(true)} style={{ height: "50px" }} src="/rocking-horse.png" alt="play" />
             <p className='font-bold mb-1'>Playtime</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/playtime_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalMilestone(true)} style={{ height: "50px" }} src="/milestone.png" alt="milestone" />
             <p className='font-bold mb-1'>Milestones</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/milestone_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
           <div className=' flex flex-col justify-center items-center my-2'>
             <img onClick={() => setModalHealth(true)} style={{ height: "50px" }} src="/baby-vaccine.png" alt="vaccine" />
             <p className='font-bold mb-1'>Health & Vaccines</p>
-            <button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button>
+            <Link to={'/health_log'}><button className='bg-pink-700 text-white px-3 py-0.5 rounded'>View Log</button></Link>
           </div>
         </div>
         <div>
-          <div className='bg-amber-100 m-3 p-3 rounded'>
-            <h3>Today's Highlights</h3>
-
-          </div>
+          <Highlights id={baby._id}/>
         </div>
         <Buttonstackdashboard />
       </div>}
-      { !firstLoad &&
-      <div>
-        <div className='hidden md:block'>
-          <img src="/hero_md.jpg" alt="babyimage" />
+      {firstLoad &&
+        <div>
+          <div className='hidden md:block'>
+            <img src="/hero_md.jpg" alt="babyimage" />
+          </div>
+          <div className='md:hidden'>
+            <img src="/hero_sm.jpg" alt="babyimage" />
+          </div>
         </div>
-        <div className='md:hidden'>
-          <img src="/hero_sm.jpg" alt="babyimage" />
-        </div>
-      </div>
       }
 
       {modalBreastfeeding &&
@@ -1774,6 +1877,51 @@ function Dashboard() {
                       </LocalizationProvider>
                     </div>
                   </div>
+                  <div className='mt-5 flex'>
+                    <span className='italic p-3 text-xl me-3'>Select Time</span>
+                    <div>
+                       <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <GlobalStyles styles={{
+                            // Selected clock number
+                            '.MuiClockNumber-root.Mui-selected': {
+                              backgroundColor: `${amber[300]} !important`,
+                              color: 'black !important',
+                            },
+                            '.MuiClockNumber-root.Mui-selected:hover': {
+                              backgroundColor: `${amber[400]} !important`,
+                            },
+                            '.MuiClockNumber-root:hover': {
+                              backgroundColor: `${amber[100]} !important`,
+                            },
+
+                            // Clock face
+                            '.MuiClock-clock': {
+                              backgroundColor: `${amber[100]} !important`,
+                            },
+
+                            // Clock needle (pointer)
+                            '.MuiClockPointer-root': {
+                              backgroundColor: `${amber[400]} !important`,
+                            },
+
+                            // Clock needle outer dot (thumb)
+                            '.MuiClockPointer-thumb': {
+                              backgroundColor: `${amber[500]} !important`,
+                              border: `1px solid ${amber[500]} !important`,
+                              boxShadow: 'none !important',
+                            }
+
+                          }} />
+                          <TimePicker defaultValue={dayjs()}
+                            value={healthDetails.time}
+                            onChange={(e) => setHealthDetails({ ...healthDetails, time: e })}
+                          className='w-56 md:w-80 ms-7'
+
+                          />
+                        </LocalizationProvider>
+                    </div>
+
+                  </div>
                 </div>
                 {/* footer of modal */}
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
@@ -1785,7 +1933,7 @@ function Dashboard() {
           </div>
         </div>}
 
-      
+
     </>
   )
 }

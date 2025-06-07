@@ -18,6 +18,11 @@ import Healthlog from './pages/Healthlog'
 import Pumping from './pages/Pumping'
 import Playtimelog from './pages/Playtimelog'
 import Pottytimelog from './pages/Pottytimelog'
+import Imagegallery from './pages/Imagegallery'
+import AdminHome from './pages/AdminHome'
+import Store from './pages/Store'
+import PaymentSuccess from './pages/PaymentSuccess'
+import PaymentError from './pages/PaymentError'
 
 function App() {
 
@@ -40,6 +45,14 @@ function App() {
         <Route path='/bath_log' element={<Bathlog/>}/>
         <Route path='/milestone_log' element={<Milestonelog/>}/>
         <Route path='/health_log' element={<Healthlog/>}/>
+        <Route path='/imagegallery' element={<Imagegallery/>}/>
+        <Route path='/store' element={<Store/>}/>
+        <Route path='/admin_home' element={<AdminHome/>}/>
+        <Route path='/payment_success/:id' element={<PaymentSuccess/>}/>
+        <Route path='/payment_error' element={<PaymentError/>}/>
+
+
+
 
 
         <Route path='/*' element={<PageNotFound />} />

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Hero() {
     return (
@@ -9,8 +10,8 @@ function Hero() {
                     <p className='text-white mb-10'>From feeding times to first steps, BabyChronicle helps you track, remember, and celebrate every little moment.
                     </p>
                     <div>
-                        <button className='btn bg-amber-200 rounded px-3 py-2 me-10 text-2xl'>Register</button>
-                        <button className='btn bg-amber-200 rounded px-3 py-2 text-2xl'>Login</button>
+                        <Link to={'/register'}><button className='btn bg-pink-600 text-white rounded px-3 py-2 me-10 text-2xl'>Register</button></Link>
+                        <Link to={'/login'}><button className='btn bg-pink-600 text-white rounded px-3 py-2 text-2xl'>Login</button></Link>
                     </div>
                 </div>
             </div>
@@ -20,8 +21,8 @@ function Hero() {
                     <p className='text-white mb-10'>From feeding times to first steps, BabyChronicle helps you track, remember, and celebrate every little moment.
                     </p>
                     <div>
-                        <button className='btn bg-amber-200 rounded px-3 py-2 me-10 text-2xl'>Register</button>
-                        <button className='btn bg-amber-200 rounded px-3 py-2 text-2xl'>Login</button>
+                        <Link to={'/register'}><button className='btn bg-pink-600 text-white rounded px-3 py-2 me-10 text-2xl'>Register</button></Link>
+                        <Link to={'/login'}><button className='btn bg-pink-600 text-white rounded px-3 py-2 text-2xl'>Login</button></Link>
                     </div>
                 </div>
             </div>
