@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBrain, faClock, faSeedling, faShieldHalved } from '@fortawesome/free-solid-svg-icons'
 import Header from '../components/Header'
+import Testimonials from '../components/Testimonials'
 
 function Home() {
     return (
@@ -31,7 +32,7 @@ function Home() {
                     <div className='text-center mb-3'>
                         <FontAwesomeIcon className='bg-amber-200 p-4 rounded-full text-5xl' icon={faShieldHalved} />
                         <h3 className='font-bold'>Your Data is Safe</h3>
-                        <p>We respect your privacy and protect your baby’s memories with secure cloud storage</p>
+                        <p>We respect your privacy and protect your baby’s memories with secure storage</p>
                     </div>
 
                 </div>
@@ -50,11 +51,11 @@ function Home() {
                     </div>
                     <div className='text-center mb-3 bg-white rounded px-5 py-10 text-xl'>
                         <p>📈</p>
-                        <p>View timelines and growth charts</p>
+                        <p>Download the report of logged activities</p>
                     </div>
                     <div className='text-center mb-3 bg-white rounded px-5 py-10 text-xl'>
                         <p>📤</p>
-                        <p>Share memories and milestones with loved ones</p>
+                        <p>Shop for your little ones</p>
                     </div>
 
                 </div>
@@ -63,19 +64,7 @@ function Home() {
             {/* Testimonials */}
             <div id='testimonials'>
                 <h1 className='text-center text-3xl my-5'>Testimonials</h1>
-                <div className='md:grid grid-cols-[2fr_1fr] my-5'>
-                    <div className='text-center md:hidden mb-3'>
-                        <img className='mx-auto' src="https://asset.gecdesigns.com/img/wallpapers/beautiful-young-woman-ai-generated-wallpaper-sr10092405-cover.webp" alt="no image" style={{ width: "200px", borderRadius: "50%" }} />
-                    </div>
-                    <div className='md:text-end text-justify px-10 ms-5 place-self-center'>
-                        <p className='mb-3'>“As a new mom, I was overwhelmed trying to keep track of feedings and sleep. BabyChronicles made it so simple. I love how I can look back and see how much my baby has grown!”</p>
-                        <p>Anjali R, Kerala</p>
-                    </div>
-                    <div className='text-center hidden md:block'>
-                        <img className='mx-auto' src="https://asset.gecdesigns.com/img/wallpapers/beautiful-young-woman-ai-generated-wallpaper-sr10092405-cover.webp" alt="no image" style={{ width: "200px", borderRadius: "50%" }} />
-                    </div>
-
-                </div>
+                <Testimonials/>
             </div>
             {/* About Us */}
             <div id='about' className='bg-pink-600 text-white p-5'>
@@ -96,15 +85,13 @@ function Home() {
                         <h6>Track feeding, sleep, diaper changes</h6>
                         <h6>Growth & milestone logging</h6>
                         <h6>1 baby profile</h6>
-                        <h6>View past 30 days of logs</h6>
                         <p className='text-2xl my-3'>Price: ₹0 / forever</p>
                     </div>
                     <div className='bg-amber-200 rounded py-2 m-3'>
                         <p className='text-2xl my-3'>Growing Moments - Premium Plan</p>
                         <h6>Unlimited baby profiles (great for twins/siblings)</h6>
-                        <h6>Full activity history & advanced charts</h6>
-                        <h6>Daily/weekly PDF reports</h6>
-                        <h6>Secure cloud backup & multi-device sync</h6>
+                        <h6>Full activity history </h6>
+                        <h6>Download PDF reports</h6>
                         <p className='text-2xl my-3'>Price: ₹199/month or ₹1999/year</p>
                     </div>
                     <div className='bg-amber-200 rounded py-2 m-3'>

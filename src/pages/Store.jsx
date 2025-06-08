@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import { getAllProductsApi, makePaymentApi } from '../services/allApis'
 import { serverurl } from '../services/serverurl'
 import { loadStripe } from '@stripe/stripe-js'
+import { Link } from 'react-router-dom'
 
 
 
@@ -52,10 +53,15 @@ function Store() {
     return (
         <>
             <Header />
-            <div>
-                <h1 className='m-5 text-3xl text-center'>Welcome to BabyChronicles Store!</h1>
-                <h3 className='m-5'>Happy Shopping</h3>
-            </div>
+            
+             <h1 className='m-5 text-3xl text-center'>Welcome to BabyChronicles Store!</h1>
+                    <div className='flex justify-between'>
+                        <h3 className='m-5'>Happy Shopping</h3>
+                    
+                    <Link to={'/dashboard'}><button className='bg-pink-700 text-white px-3 py-2 rounded me-5'>Back To Dashboard</button></Link>
+                    </div>
+        
+           
             <div>
                 <div className="p-6">
                     <div className="flex border-b-2 border-pink-500 mb-4">

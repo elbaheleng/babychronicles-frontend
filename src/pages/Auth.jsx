@@ -42,6 +42,7 @@ function Auth({ register }) {
     const handleRegister = async () => {
         const { fullname, email, password, cpassword, dob, gender, babyname } = registrationDetails
 
+
         if (!fullname || !email || !password || !cpassword || !dob || !gender) {
             toast.warning("Please fill all fields.")
         } else {
@@ -76,6 +77,8 @@ function Auth({ register }) {
                             babyname: "Your baby"
                         })
                     } else {
+                        console.log(result.data);
+                        
                         toast.error("Something went wrong!")
                         setRegistrationDetails({
                             fullname: "",
@@ -130,11 +133,13 @@ function Auth({ register }) {
     //function to handle login
     const handleLogin = async () => {
         const { email, password } = registrationDetails
+        console.log(email, password);
+        
         if (!email || !password) {
             toast.error("Pls fill all the fields.")
         } else {
             const result = await loginApi({ email, password })
-            //console.log(result);
+            console.log(result);
             if (result.status == 200) {
                 toast.success("Login Successful")
                 sessionStorage.setItem("existingUser", JSON.stringify(result.data.existingUser))

@@ -113,9 +113,6 @@ function Buttonstackdashboard() {
     return (
         <div className='m-3 flex justify-center items-center'>
             <div className='m-2'>
-                <button className='bg-amber-200 px-3 py-0.5 rounded'>Charts</button>
-            </div>
-            <div className='m-2'>
                <Link to={'/imagegallery'}> <button className='bg-amber-200 px-3 py-0.5 rounded'>Image Gallery</button></Link>
             </div>
             <div className='m-2'>

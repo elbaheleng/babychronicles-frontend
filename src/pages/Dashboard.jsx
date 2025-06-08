@@ -49,6 +49,9 @@ function Dashboard() {
   const [userDetails, setUserDetails] = useState({})
   const [userBabies, setUserBabies] = useState([])
   const [age, setAge] = useState("")
+  const [logAdded, setLogAdded] = useState({})
+  const [token, settoken] = useState("")
+  
 
 
   const [breastfeedingDetails, setBreastfeedingDetails] = useState({
@@ -292,6 +295,7 @@ function Dashboard() {
     const result = await addBreastfeedingApi({ babyid: _id, date, starttime, endtime, duration, side })
     if (result.status == 200) {
       toast.success("Breastfeeding log added.")
+      setLogAdded(result.data)
       closeBreastfeedingModal()
     } else {
       toast.error("Something went wrong")
@@ -305,6 +309,8 @@ function Dashboard() {
     const result = await addBottlefeedApi({ babyid: _id, date, time, type, quantity })
     if (result.status == 200) {
       toast.success("Bottle feed log added.")
+      setLogAdded(result.data)
+
       closeBottlefeedModal()
     } else {
       toast.error("Something went wrong")
@@ -318,6 +324,8 @@ function Dashboard() {
     const result = await addDiaperchangeApi({ babyid: _id, date, time, type })
     if (result.status == 200) {
       toast.success("Diaper change log added.")
+      setLogAdded(result.data)
+
       closeDiaperchangeModal()
     } else {
       toast.error("Something went wrong")
@@ -331,6 +339,8 @@ function Dashboard() {
     const result = await addSleepApi({ babyid: _id, date, starttime, endtime, duration })
     if (result.status == 200) {
       toast.success("Sleep log added.")
+      setLogAdded(result.data)
+
       closeSleepModal()
     } else {
       toast.error("Something went wrong")
@@ -357,6 +367,8 @@ function Dashboard() {
     const result = await addPottytimeApi({ babyid: _id, date, time, type })
     if (result.status == 200) {
       toast.success("Potty time log added.")
+      setLogAdded(result.data)
+
       closePottytimeModal()
     } else {
       toast.error("Something went wrong")
@@ -371,6 +383,8 @@ function Dashboard() {
     const result = await addPlaytimeApi({ babyid: _id, date, starttime, endtime, description, duration })
     if (result.status == 200) {
       toast.success("Play time log added.")
+      setLogAdded(result.data)
+
       closePlaytimeModal()
     } else {
       toast.error("Something went wrong")
@@ -384,6 +398,8 @@ function Dashboard() {
     const result = await addBathApi({ babyid: _id, date, starttime, endtime, duration })
     if (result.status == 200) {
       toast.success("Bath log added.")
+      setLogAdded(result.data)
+
       closeBathModal()
     } else {
       toast.error("Something went wrong")
@@ -425,13 +441,17 @@ function Dashboard() {
     const reqHeader = {
       "Authorization": `Bearer ${token}`
     }
+    console.log("inside fun frontend");
+    
     const result = await getAllBabiesByUserApi(reqHeader)
     setUserBabies(result.data)
+    console.log(result);
+    
 
   }
 
   // console.log(userBabies);
-//console.log(baby);
+  //console.log(baby);
 
   //to calculate baby's age
   const calculateAge = () => {
@@ -470,6 +490,7 @@ function Dashboard() {
     if (sessionStorage.getItem("token")) {
       const token = sessionStorage.getItem("token")
       const user = JSON.parse(sessionStorage.getItem("existingUser"))
+      settoken(token)
       setUserDetails(user)
       getAllBabiesByUser(token)
       if (modalBreastfeeding) {
@@ -488,16 +509,17 @@ function Dashboard() {
         calculateEndtimeBath()
       }
     }
-    if(!firstLoad){
-    calculateAge()
+    if (!firstLoad) {
+      calculateAge()
     }
-
   }, [breastfeedingDetails.duration, sleepDetails.duration, pumpingDetails.duration, playtimeDetails.duration, bathDetails.duration, baby, addBabyStatus])
   useEffect(() => {
     if (sessionStorage.getItem("token") && localStorage.getItem("baby")) {
       setFirstLoad(false)
     }
   }, [])
+  console.log(userBabies);
+  
   useEffect(() => {
     const baby1 = JSON.parse(localStorage.getItem("baby"))
     setBaby(baby1)
@@ -510,7 +532,7 @@ function Dashboard() {
       <div className='flex justify-between items-center'>
         <div>
           <h3 className='text-xl ms-5'>Hello {userDetails.fullname}! </h3>
-          {!firstLoad ? <h4 className='ms-5'> {baby.name} is {age} old!</h4> : <h4 className='ms-5'>Please select your baby from dropdown.</h4>}
+          {!token ? <h4 className='ms-5'>Please login.</h4> :!firstLoad ? <h4 className='ms-5'> {baby.name} is {age} old!</h4> : <h4 className='ms-5'>Please select your baby from dropdown.</h4>}
         </div>
         <div className='text-end my-5'>
           <p className='me-3'>Choose Baby</p>
@@ -589,7 +611,7 @@ function Dashboard() {
           </div>
         </div>
         <div>
-          <Highlights id={baby._id}/>
+          <Highlights id={baby._id} log={logAdded} />
         </div>
         <Buttonstackdashboard />
       </div>}
@@ -1880,45 +1902,45 @@ function Dashboard() {
                   <div className='mt-5 flex'>
                     <span className='italic p-3 text-xl me-3'>Select Time</span>
                     <div>
-                       <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <GlobalStyles styles={{
-                            // Selected clock number
-                            '.MuiClockNumber-root.Mui-selected': {
-                              backgroundColor: `${amber[300]} !important`,
-                              color: 'black !important',
-                            },
-                            '.MuiClockNumber-root.Mui-selected:hover': {
-                              backgroundColor: `${amber[400]} !important`,
-                            },
-                            '.MuiClockNumber-root:hover': {
-                              backgroundColor: `${amber[100]} !important`,
-                            },
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <GlobalStyles styles={{
+                          // Selected clock number
+                          '.MuiClockNumber-root.Mui-selected': {
+                            backgroundColor: `${amber[300]} !important`,
+                            color: 'black !important',
+                          },
+                          '.MuiClockNumber-root.Mui-selected:hover': {
+                            backgroundColor: `${amber[400]} !important`,
+                          },
+                          '.MuiClockNumber-root:hover': {
+                            backgroundColor: `${amber[100]} !important`,
+                          },
 
-                            // Clock face
-                            '.MuiClock-clock': {
-                              backgroundColor: `${amber[100]} !important`,
-                            },
+                          // Clock face
+                          '.MuiClock-clock': {
+                            backgroundColor: `${amber[100]} !important`,
+                          },
 
-                            // Clock needle (pointer)
-                            '.MuiClockPointer-root': {
-                              backgroundColor: `${amber[400]} !important`,
-                            },
+                          // Clock needle (pointer)
+                          '.MuiClockPointer-root': {
+                            backgroundColor: `${amber[400]} !important`,
+                          },
 
-                            // Clock needle outer dot (thumb)
-                            '.MuiClockPointer-thumb': {
-                              backgroundColor: `${amber[500]} !important`,
-                              border: `1px solid ${amber[500]} !important`,
-                              boxShadow: 'none !important',
-                            }
+                          // Clock needle outer dot (thumb)
+                          '.MuiClockPointer-thumb': {
+                            backgroundColor: `${amber[500]} !important`,
+                            border: `1px solid ${amber[500]} !important`,
+                            boxShadow: 'none !important',
+                          }
 
-                          }} />
-                          <TimePicker defaultValue={dayjs()}
-                            value={healthDetails.time}
-                            onChange={(e) => setHealthDetails({ ...healthDetails, time: e })}
+                        }} />
+                        <TimePicker defaultValue={dayjs()}
+                          value={healthDetails.time}
+                          onChange={(e) => setHealthDetails({ ...healthDetails, time: e })}
                           className='w-56 md:w-80 ms-7'
 
-                          />
-                        </LocalizationProvider>
+                        />
+                      </LocalizationProvider>
                     </div>
 
                   </div>
