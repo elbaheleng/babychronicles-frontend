@@ -39,11 +39,14 @@ function Header() {
                 {user.email != 'admin@bc.com' && <div className='hidden md:flex justify-center items-center'>
                     <ul className='flex justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
-                        <a href="#about"onClick={(e) => {
-  e.preventDefault();
-  document.getElementById("about").scrollIntoView({ behavior: "smooth" });
-}}><li>About</li></a>
-                        <a href='#testimonials'><li>Testimonials</li></a>
+                        <a href="#about" onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+                        }}><li>About</li></a>
+                        <a href='#testimonials' onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("testimonials").scrollIntoView({ behavior: "smooth" });
+                        }}><li>Testimonials</li></a>
                     </ul>
                 </div>}
                 <div className='hidden md:flex justify-start items-center gap-3'>
@@ -61,10 +64,13 @@ function Header() {
                     <ul className='flex flex-col justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
                         <a href="#about" onClick={(e) => {
-  e.preventDefault();
-  document.getElementById("about").scrollIntoView({ behavior: "smooth" });
-}}><li>About</li></a>
-                        <a href='#testimonials'><li>Testimonials</li></a>
+                            e.preventDefault();
+                            document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+                        }}><li>About</li></a>
+                        <a href='#testimonials' onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("testimonials").scrollIntoView({ behavior: "smooth" });
+                        }}><li>Testimonials</li></a>
                     </ul>
                 </div>}
                 <div className='md:hidden flex justify-center items-center gap-3 py-2'>
