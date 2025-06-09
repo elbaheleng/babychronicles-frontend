@@ -37,7 +37,8 @@ export default function Testimonials() {
   return (
     
 
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden z-10">
+         <h1 className='text-center text-3xl mt-16 my-5'>Testimonials</h1>
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
