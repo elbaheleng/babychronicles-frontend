@@ -518,12 +518,12 @@ function Dashboard() {
       setFirstLoad(false)
     }
   }, [])
-  console.log(userBabies);
+  //console.log(userBabies);
   
   useEffect(() => {
     const baby1 = JSON.parse(localStorage.getItem("baby"))
     setBaby(baby1)
-  }, [baby])
+  }, [])
   return (
 
     <>
