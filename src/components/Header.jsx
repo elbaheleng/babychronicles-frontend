@@ -36,7 +36,7 @@ function Header() {
                         <h1 className='ms-2 text-3xl'>Baby Chronicles</h1>
                     </Link>
                 </div>
-                {user.email != 'admin@bc.com' && <div className='hidden md:flex justify-center items-center'>
+                {!token && <div className='hidden md:flex justify-center items-center'>
                     <ul className='flex justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
                         <a href="#about" onClick={(e) => {
@@ -60,7 +60,7 @@ function Header() {
                 </div>
             </div>
             {toggle && <div className='bg-amber-200 flex flex-col py-2'>
-                {user.email != 'admin@bc.com' && <div className='md:hidden flex justify-center items-center'>
+                {!token && <div className='md:hidden flex justify-center items-center'>
                     <ul className='flex flex-col justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
                         <a href="#about" onClick={(e) => {

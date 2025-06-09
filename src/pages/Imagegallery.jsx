@@ -108,7 +108,7 @@ function Imagegallery() {
                 <h1 className='text-3xl text-center mt-20'>{baby?.name}'s Image Gallery</h1>
                 <div className='text-end  me-5 md:me-20 '>
                     <button onClick={() => setModalUploadImage(true)} className='bg-pink-700 text-white px-3 py-2 rounded me-3'>Upload New Image</button>
-                    <Link to={'/dashboard'}><button className='bg-pink-700 text-white px-3 py-2 rounded'>Back Home</button></Link>
+                    <Link to={'/dashboard'}><button className='bg-pink-700 text-white px-3 py-2 rounded'>Back To Dashboard</button></Link>
                 </div>
                 {allPhotos?.length > 0 ? <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 m-5'>
                     {allPhotos?.map((item, index) => (
