@@ -29,7 +29,7 @@ function Header() {
     }, [])
     return (
         <>
-            <div className='bg-amber-200 flex justify-between'>
+            <div className='fixed top-0 left-0 w-full bg-amber-200 flex justify-between'>
                 <div className='flex justify-start items-center ms-3'>
                     <Link to={'/'} className='flex justify-start items-center'>
                         <img src="/favicon.png" alt="" style={{ height: "50px" }} />

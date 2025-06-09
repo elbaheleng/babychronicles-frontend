@@ -63,12 +63,12 @@ function Home() {
             </div>
             {/* Testimonials */}
             <div id='testimonials'>
-                <h1 className='text-center text-3xl my-5'>Testimonials</h1>
+                <h1 className='text-center text-3xl mt-10 my-5'>Testimonials</h1>
                 <Testimonials/>
             </div>
             {/* About Us */}
             <div id='about' className='bg-pink-600 text-white p-5'>
-                <h1 className='text-center text-3xl my-5'>About Us</h1>
+                <h1 className='text-center text-3xl mt-10 my-5'>About Us</h1>
                 <div className='md:px-20 px-10 text-justify my-8 '>
                     <p className='mb-3'>Hi, I'm Elba Helen George, the creator of BabyChronicles.</p>
                     <p className='mb-3'>This app is inspired by my own journey into motherhood. As a new mom, I found it incredibly challenging to keep track of my baby's needs — from feeding times and sleep schedules to diaper changes and medical details. Night feeds were especially exhausting, and without external help, remembering everything felt overwhelming.Recovering from a C-section while managing a newborn only added to the stress. I realized how much easier it would be if there was a simple, supportive tool to log all these daily activities in one place.</p>
