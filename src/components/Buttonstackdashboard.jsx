@@ -20,6 +20,8 @@ function Buttonstackdashboard() {
 
     const [modalAddBaby, setModalAddBaby] = useState(false)
     const [modalEditBaby, setModalEditBaby] = useState(false)
+        const [token, settoken] = useState("")
+    
 
     const [addBabyDetails, setAddBabyDetails] = useState({
         dob: dayjs(),
@@ -50,7 +52,11 @@ function Buttonstackdashboard() {
         })
     }
     const handleEditBabyReset = () => {
-        setEditBabyDetails(baby)
+        setEditBabyDetails({
+        dob: dayjs(),
+        gender: "",
+        name: ""
+    })
     }
     //function to add a new baby
     const handleAddBaby = async () => {
@@ -78,7 +84,9 @@ function Buttonstackdashboard() {
 
     //function to handle edit baby
     const handleEditBaby = async () => {
-        const { _id, dob, gender, name, userMail } = editBabyDetails
+        const { dob, gender, name} = editBabyDetails
+        const userMail = userDetails.email
+        const {_id} = baby
         if (dob == baby.dob) {
             const result = await editBabyDetailsApi({ _id, dob, gender, name, userMail })
             if (result.status == 200) {
@@ -96,6 +104,7 @@ function Buttonstackdashboard() {
             const result = await editBabyDetailsApi({ _id, dob: dob1, gender, name, userMail })
             if (result.status == 200) {
                 setBaby(result.data)
+                localStorage.setItem("baby", JSON.stringify(result.data))
                 toast.success("Baby details updated.")
                 closeEditBabyModal()
             }
@@ -112,9 +121,10 @@ function Buttonstackdashboard() {
         if (sessionStorage.getItem("token")) {
             const user = JSON.parse(sessionStorage.getItem("existingUser"))
             setUserDetails(user)
-            setEditBabyDetails(baby)
+            settoken(token)
+
         }
-    }, [baby])
+    }, [])
     return (
         <div className='m-3 flex justify-center items-center'>
             <div className='m-2'>
