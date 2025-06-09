@@ -79,6 +79,7 @@ function Buttonstackdashboard() {
             const result = await editBabyDetailsApi({ _id, dob, gender, name, userMail })
             if (result.status == 200) {
                 setBaby(result.data)
+                localStorage.setItem("baby", JSON.stringify(result.data))
                 toast.success("Baby details updated.")
                 closeEditBabyModal()
             }
