@@ -19,8 +19,8 @@ function Buttonstackdashboard() {
     const { baby, setBaby } = useContext(babyContext)
 
     const [modalAddBaby, setModalAddBaby] = useState(false)
-    const [modalEditBaby, setModalEditBaby] = useState(false)   
-    const [token,settoken] = useState("") 
+    const [modalEditBaby, setModalEditBaby] = useState(false)
+    const [token, settoken] = useState("")
 
     const [addBabyDetails, setAddBabyDetails] = useState({
         dob: dayjs(),
@@ -41,10 +41,10 @@ function Buttonstackdashboard() {
     }
     const handleAddBabyReset = () => {
         setAddBabyDetails({
-        dob: dayjs(),
-        gender: "",
-        name: ""
-    })
+            dob: dayjs(),
+            gender: "",
+            name: ""
+        })
     }
     const handleEditBabyReset = () => {
         setEditBabyDetails(baby)
@@ -75,7 +75,7 @@ function Buttonstackdashboard() {
 
     //function to handle edit baby
     const handleEditBaby = async () => {
-        const {_id, dob, gender, name,userMail } = editBabyDetails
+        const { _id, dob, gender, name, userMail } = editBabyDetails
         if (dob == baby.dob) {
             const result = await editBabyDetailsApi({ _id, dob, gender, name, userMail })
             if (result.status == 200) {
@@ -110,16 +110,27 @@ function Buttonstackdashboard() {
         if (sessionStorage.getItem("token")) {
             const user = JSON.parse(sessionStorage.getItem("existingUser"))
             const tok = sessionStorage.getItem("token")
-            const baby1 = JSON.parse(sessionStorage.getItem("baby"))
+            const storedBaby = sessionStorage.getItem("baby");
+            const baby1 = storedBaby ? JSON.parse(storedBaby) : {
+                name: "",
+                gender: "",
+                dob: dayjs(),
+                _id: "",
+                userMail: ""
+            };
+
             setUserDetails(user)
             setEditBabyDetails(baby1)
             settoken(tok)
+
+
+
         }
     }, [baby])
     return (
         <div className='m-3 flex justify-center items-center'>
             <div className='m-2'>
-               <Link to={'/imagegallery'}> <button className='bg-amber-200 px-3 py-0.5 rounded'>Image Gallery</button></Link>
+                <Link to={'/imagegallery'}> <button className='bg-amber-200 px-3 py-0.5 rounded'>Image Gallery</button></Link>
             </div>
             <div className='m-2'>
                 <button type='button' onClick={() => setModalEditBaby(true)} className='bg-amber-200 px-3 py-0.5 rounded'>Edit Baby</button>
