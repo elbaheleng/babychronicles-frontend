@@ -40,7 +40,7 @@ function Header() {
                     <ul className='flex justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
                         <a href="#about"><li>About</li></a>
-                        <Link to={'/'}><li>Testimonials</li></Link>
+                        <a href='#testimonials'><li>Testimonials</li></a>
                     </ul>
                 </div>}
                 <div className='hidden md:flex justify-start items-center gap-3'>
@@ -58,7 +58,7 @@ function Header() {
                     <ul className='flex flex-col justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
                         <a href="#about"><li>About</li></a>
-                        <Link to={'/'}><li>Testimonials</li></Link>
+                        <a href='#testimonials'><li>Testimonials</li></a>
                     </ul>
                 </div>}
                 <div className='md:hidden flex justify-center items-center gap-3 py-2'>
