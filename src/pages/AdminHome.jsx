@@ -163,7 +163,7 @@ function AdminHome() {
     return (
         <>
             <Header />
-            <div>
+            <div className='mt-10'>
                 <h1 className='m-5 text-3xl'>Hello, Admin!</h1>
                 <div>
                     <div className="p-6">
