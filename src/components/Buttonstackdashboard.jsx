@@ -19,9 +19,7 @@ function Buttonstackdashboard() {
     const { baby, setBaby } = useContext(babyContext)
 
     const [modalAddBaby, setModalAddBaby] = useState(false)
-    const [modalEditBaby, setModalEditBaby] = useState(false)
-        const [token, settoken] = useState("")
-    
+    const [modalEditBaby, setModalEditBaby] = useState(false)    
 
     const [addBabyDetails, setAddBabyDetails] = useState({
         dob: dayjs(),
@@ -121,7 +119,6 @@ function Buttonstackdashboard() {
         if (sessionStorage.getItem("token")) {
             const user = JSON.parse(sessionStorage.getItem("existingUser"))
             setUserDetails(user)
-            settoken(token)
 
         }
     }, [])
@@ -269,7 +266,7 @@ function Buttonstackdashboard() {
                                                         backgroundColor: amber[100],
                                                     },
                                                 }} />
-                                                <DatePicker defaultValue={dayjs(editBabyDetails.dob)}
+                                                <DatePicker defaultValue={dayjs()}
                                                     onChange={(e) => setEditBabyDetails({ ...editBabyDetails, dob: e })}
                                                     format="DD/MM/YYYY"
                                                     maxDate={dayjs()}
