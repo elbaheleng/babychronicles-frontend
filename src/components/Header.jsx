@@ -39,7 +39,7 @@ function Header() {
                 {user.email != 'admin@bc.com' && <div className='hidden md:flex justify-center items-center'>
                     <ul className='flex justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
-                        <Link to={'/'}><li>About</li></Link>
+                        <a href="#about"><li>About</li></a>
                         <Link to={'/'}><li>Testimonials</li></Link>
                     </ul>
                 </div>}
@@ -57,7 +57,7 @@ function Header() {
                 {user.email != 'admin@bc.com' && <div className='md:hidden flex justify-center items-center'>
                     <ul className='flex flex-col justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
-                        <Link to={'/'}><li>About</li></Link>
+                        <a href="#about"><li>About</li></a>
                         <Link to={'/'}><li>Testimonials</li></Link>
                     </ul>
                 </div>}
