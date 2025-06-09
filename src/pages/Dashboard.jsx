@@ -534,7 +534,7 @@ function Dashboard() {
           <h3 className='text-xl ms-5'>Hello {userDetails.fullname}! </h3>
           {!token ? <h4 className='ms-5'>Please login.</h4> :!firstLoad ? <h4 className='ms-5'> {baby.name} is {age} old!</h4> : <h4 className='ms-5'>Please select your baby from dropdown.</h4>}
         </div>
-        <div className='text-end my-5'>
+        <div className='text-end my-1'>
           <p className='me-3'>Choose Baby</p>
           <Select
             className='mt-2 w-32 md:w-80 me-3'
@@ -556,7 +556,7 @@ function Dashboard() {
           </Select>
         </div>
       </div>
-      {!firstLoad && <p className='ms-5'>Click on the icons to log the activities.</p>}
+      {!firstLoad && <p className='ms-5 mt-1'>Click on the icons to log the activities.</p>}
       {!firstLoad && <div className='md:grid grid-cols-[3fr_1fr]'>
         <div className='grid md:grid-cols-5 grid-cols-3 my-3'>
           <div className=' flex flex-col justify-center items-center my-2'>
