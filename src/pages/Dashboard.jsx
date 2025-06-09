@@ -528,7 +528,7 @@ function Dashboard() {
 
     <>
       <Header />
-      <p className='text-end mt-10'>{`${month} ${day}, ${year}, ${weekday}`}</p>
+      <p className='text-end mt-16'>{`${month} ${day}, ${year}, ${weekday}`}</p>
       <div className='flex justify-between items-center'>
         <div>
           <h3 className='text-xl ms-5'>Hello {userDetails.fullname}! </h3>

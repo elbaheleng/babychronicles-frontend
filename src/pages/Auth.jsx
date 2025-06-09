@@ -181,7 +181,7 @@ function Auth({ register }) {
     return (
         <>
             <Header />
-            <div className='md:grid grid-cols-2 mt-10'>
+            <div className='md:grid grid-cols-2 mt-16'>
                 <div className='mt-10'>
                     <div className='text-center'>
                         {register && <h1 className='text-3xl'>REGISTER</h1>}
