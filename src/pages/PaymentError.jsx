@@ -8,7 +8,7 @@ function PaymentError() {
   return (
     <>
     <Header/>
-    <div className='container mt-5'>
+    <div className='container mt-20'>
             <div className='md:grid grid-cols-2 px-20 '>
                 <div className='flex justify-center items-start flex-col'>
                     <h1 className='text-4xl text-red-600 mb-5'>Sorry! Your Payment is unsuccessful.</h1>

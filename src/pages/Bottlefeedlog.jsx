@@ -82,7 +82,7 @@ const getTargetElement = () => document.getElementById('content-id');
   return (
     <>
       <Header />
-      <div className=' mt-5  me-5 md:me-20 flex justify-end'>
+      <div className=' mt-20  me-5 md:me-20 flex justify-end'>
         <Link to={'/dashboard'}><button className='bg-pink-700 text-white px-3 py-2 rounded me-3'>Back To Dashboard</button></Link>
         <button type='button'onClick={() => generatePDF(getTargetElement, options)} className='bg-pink-700 text-white px-3 py-2 rounded'>Download</button>
         </div>

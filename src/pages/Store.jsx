@@ -54,7 +54,7 @@ function Store() {
         <>
             <Header />
             
-             <h1 className='m-5 text-3xl text-center'>Welcome to BabyChronicles Store!</h1>
+             <h1 className='m-20 text-3xl text-center'>Welcome to BabyChronicles Store!</h1>
                     <div className='flex justify-between'>
                         <h3 className='m-5'>Happy Shopping</h3>
                     

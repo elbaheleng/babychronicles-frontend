@@ -105,7 +105,7 @@ function Imagegallery() {
         <>
             <Header />
             <div>
-                <h1 className='text-3xl text-center mt-5'>{baby?.name}'s Image Gallery</h1>
+                <h1 className='text-3xl text-center mt-20'>{baby?.name}'s Image Gallery</h1>
                 <div className='text-end  me-5 md:me-20 '>
                     <button onClick={() => setModalUploadImage(true)} className='bg-pink-700 text-white px-3 py-2 rounded me-3'>Upload New Image</button>
                     <Link to={'/dashboard'}><button className='bg-pink-700 text-white px-3 py-2 rounded'>Back Home</button></Link>

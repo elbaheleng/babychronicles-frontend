@@ -29,7 +29,7 @@ function PaymentSuccess() {
     return (
         <>
             <Header />
-            <div className='container my-10'>
+            <div className='container my-28'>
                 <div className='md:grid grid-cols-2 px-20 '>
                     <div className='flex justify-center items-start flex-col'>
                         <h1 className='text-4xl text-pink-600'>Congratulations!</h1>
