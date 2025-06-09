@@ -63,7 +63,6 @@ function Home() {
             </div>
             {/* Testimonials */}
             <div id='testimonials'>
-                <h1 className='text-center text-3xl mt-10 my-5'>Testimonials</h1>
                 <Testimonials/>
             </div>
             {/* About Us */}
