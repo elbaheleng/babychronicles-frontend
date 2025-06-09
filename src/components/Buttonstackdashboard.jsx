@@ -26,7 +26,11 @@ function Buttonstackdashboard() {
         gender: "",
         name: ""
     })
-    const [editBabyDetails, setEditBabyDetails] = useState(baby)
+    const [editBabyDetails, setEditBabyDetails] = useState({
+        dob: dayjs(),
+        gender: "",
+        name: ""
+    })
     const [userDetails, setUserDetails] = useState({})
 
 
