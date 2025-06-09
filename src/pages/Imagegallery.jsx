@@ -78,18 +78,18 @@ function Imagegallery() {
         const result = await getAllPhotosApi(babyid)
         if (result.status == 200) {
             setAllPhotos(result.data)
-            
+
         } else {
             toast.error("Something went wrong")
         }
 
     }
     const deletePhoto = async (id) => {
-       // console.log(id);
-        
-       const result = await deletePhotoApi(id)
-      //  console.log(result);
-        
+        // console.log(id);
+
+        const result = await deletePhotoApi(id)
+        //  console.log(result);
+
         if (result.status == 200) {
             toast.info("Photo delete successful.")
             setPhotoAddDeleteStatus(result.data)
@@ -116,9 +116,9 @@ function Imagegallery() {
                     {allPhotos?.map((item, index) => (
                         <div className="max-w-sm rounded overflow-hidden shadow-lg" key={index}>
                             <img onClick={() => {
-  setSelectedPhoto(item);
-  setModalOpenImage(true);
-}} className="w-full cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110" src={`${serverurl}/uploads/${item.photo}`} alt={item.title} />
+                                setSelectedPhoto(item);
+                                setModalOpenImage(true);
+                            }} className="w-full cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110" src={`${serverurl}/uploads/${item.photo}`} alt={item.title} />
                             <div className="p-4">
                                 <div className="font-bold mb-2">{item?.title}</div>
                                 <p className="text-gray-700">
@@ -158,7 +158,7 @@ function Imagegallery() {
                         </div>
                     </div>
                 </div>}
-               
+
 
             {modalUploadImage &&
                 <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

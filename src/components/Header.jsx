@@ -59,7 +59,7 @@ function Header() {
                     {toggle && <FontAwesomeIcon onClick={() => setToggle(false)} className='text-2xl me-3' icon={faXmark} />}
                 </div>
             </div>
-            {toggle && <div className='bg-amber-200 flex flex-col py-2'>
+            {toggle && <div className='fixed top-0 left-0 w-full bg-amber-200 flex flex-col py-2'>
                 {!token && <div className='md:hidden flex justify-center items-center'>
                     <ul className='flex flex-col justify-center items-center gap-4'>
                         <Link to={'/'}><li>Home</li></Link>
