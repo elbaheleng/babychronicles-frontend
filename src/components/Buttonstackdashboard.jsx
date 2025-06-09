@@ -75,7 +75,11 @@ function Buttonstackdashboard() {
 
     //function to handle edit baby
     const handleEditBaby = async () => {
-        const { _id, dob, gender, name, userMail } = editBabyDetails
+        const { dob, gender, name } = editBabyDetails
+        const userMail = userDetails.email
+        const _id = baby._id
+       // console.log(_id, dob, gender, name, userMail);
+        
         if (dob == baby.dob) {
             const result = await editBabyDetailsApi({ _id, dob, gender, name, userMail })
             if (result.status == 200) {
@@ -118,13 +122,9 @@ function Buttonstackdashboard() {
                 _id: "",
                 userMail: ""
             };
-
             setUserDetails(user)
             setEditBabyDetails(baby1)
             settoken(tok)
-
-
-
         }
     }, [baby])
     return (

@@ -9,8 +9,10 @@ import Contexttoshare from './context/Contexttoshare.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <Contexttoshare>
     <BrowserRouter>
-    <Contexttoshare><App /></Contexttoshare>
+    <App />
     </BrowserRouter>
+    </Contexttoshare>
   </StrictMode>,
 )

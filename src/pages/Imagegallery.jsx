@@ -28,6 +28,8 @@ function Imagegallery() {
     })
     const [photoAddDeleteStatus, setPhotoAddDeleteStatus] = useState({})
     const [allPhotos, setAllPhotos] = useState([])
+    const [selectedPhoto, setSelectedPhoto] = useState(null)
+
 
     const handleReset = () => {
         setUploadPhotoDetails({
@@ -106,14 +108,17 @@ function Imagegallery() {
             <Header />
             <div>
                 <h1 className='text-3xl text-center mt-20'>{baby?.name}'s Image Gallery</h1>
-                <div className='text-end  me-5 md:me-20 '>
+                <div className='text-end mt-3  me-5 md:me-20 '>
                     <button onClick={() => setModalUploadImage(true)} className='bg-pink-700 text-white px-3 py-2 rounded me-3'>Upload New Image</button>
                     <Link to={'/dashboard'}><button className='bg-pink-700 text-white px-3 py-2 rounded'>Back To Dashboard</button></Link>
                 </div>
                 {allPhotos?.length > 0 ? <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 m-5'>
                     {allPhotos?.map((item, index) => (
                         <div className="max-w-sm rounded overflow-hidden shadow-lg" key={index}>
-                            <img onClick={() => setModalOpenImage(true)} className="w-full transition-transform duration-300 ease-in-out transform hover:scale-110" src={`${serverurl}/uploads/${item?.photo}`} alt="baby photo" />
+                            <img onClick={() => {
+  setSelectedPhoto(item);
+  setModalOpenImage(true);
+}} className="w-full cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110" src={`${serverurl}/uploads/${item.photo}`} alt={item.title} />
                             <div className="p-4">
                                 <div className="font-bold mb-2">{item?.title}</div>
                                 <p className="text-gray-700">
@@ -131,7 +136,7 @@ function Imagegallery() {
                     <p className='text-center'>No photos added yet.</p>
                 }
             </div>
-            {modalOpenImage &&
+            {modalOpenImage && selectedPhoto &&
                 <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
 
                     <div className="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
@@ -146,13 +151,14 @@ function Imagegallery() {
                                 </div>
                                 {/* boby of modal */}
                                 <div className="bg-white px-4 pt-3 pb-4 sm:p-6 sm:pb-4">
-                                    <img src="https://img.freepik.com/free-photo/shot-cute-baby-girl-looking-camera_329181-19580.jpg?semt=ais_hybrid&w=740" alt="no image" />
+                                    <img src={`${serverurl}/uploads/${selectedPhoto.photo}`} alt={selectedPhoto.title} />
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </div>}
+               
 
             {modalUploadImage &&
                 <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

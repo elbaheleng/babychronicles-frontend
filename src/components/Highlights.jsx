@@ -136,14 +136,6 @@ function Highlights({ id ,log}) {
             ) : (
                 <p>No potty time logged today</p>
             )}
-            {pottytimesToday.length > 0 ? (
-                <div className='mb-2'>
-                    <p className='font-bold text-pink-800'>Potty Time</p>
-                    <p>{pottytimesToday[0].type} at {dayjs(pottytimesToday[0]?.time).format('hh:mm A')} </p>
-                </div>
-            ) : (
-                <p>No potty time logged today</p>
-            )}
             {playtimesToday.length > 0 ? (
                 <div className='mb-2'>
                     <p className='font-bold text-pink-800'>Play Time</p>

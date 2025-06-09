@@ -441,17 +441,10 @@ function Dashboard() {
     const reqHeader = {
       "Authorization": `Bearer ${token}`
     }
-  
-
     const result = await getAllBabiesByUserApi(reqHeader)
     setUserBabies(result.data)
-    console.log(result);
-
-
+    //console.log(result);
   }
-
-  // console.log(userBabies);
-  //console.log(baby);
 
   //to calculate baby's age
   const calculateAge = () => {
