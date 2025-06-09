@@ -51,7 +51,7 @@ function Dashboard() {
   const [age, setAge] = useState("")
   const [logAdded, setLogAdded] = useState({})
   const [token, settoken] = useState("")
-  
+
 
 
   const [breastfeedingDetails, setBreastfeedingDetails] = useState({
@@ -441,12 +441,12 @@ function Dashboard() {
     const reqHeader = {
       "Authorization": `Bearer ${token}`
     }
-    console.log("inside fun frontend");
-    
+  
+
     const result = await getAllBabiesByUserApi(reqHeader)
     setUserBabies(result.data)
     console.log(result);
-    
+
 
   }
 
@@ -519,11 +519,11 @@ function Dashboard() {
     }
   }, [])
   //console.log(userBabies);
-  
+
   useEffect(() => {
     const baby1 = JSON.parse(localStorage.getItem("baby"))
     setBaby(baby1)
-  }, [baby])
+  }, [])
   return (
 
     <>
@@ -532,7 +532,7 @@ function Dashboard() {
       <div className='flex justify-between items-center'>
         <div>
           <h3 className='text-xl ms-5'>Hello {userDetails.fullname}! </h3>
-          {!token ? <h4 className='ms-5'>Please login.</h4> :!firstLoad ? <h4 className='ms-5'> {baby.name} is {age} old!</h4> : <h4 className='ms-5'>Please select your baby from dropdown.</h4>}
+          {!token ? <h4 className='ms-5'>Please login.</h4> : !firstLoad ? <h4 className='ms-5'> {baby.name} is {age} old!</h4> : <h4 className='ms-5'>Please select your baby from dropdown.</h4>}
         </div>
         <div className='text-end my-1'>
           <p className='me-3'>Choose Baby</p>

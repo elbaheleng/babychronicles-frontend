@@ -40,7 +40,11 @@ function Buttonstackdashboard() {
         handleEditBabyReset()
     }
     const handleAddBabyReset = () => {
-        setAddBabyDetails(baby)
+        setAddBabyDetails({
+        dob: dayjs(),
+        gender: "",
+        name: ""
+    })
     }
     const handleEditBabyReset = () => {
         setEditBabyDetails(baby)
@@ -110,7 +114,6 @@ function Buttonstackdashboard() {
             setUserDetails(user)
             setEditBabyDetails(baby1)
             settoken(tok)
-
         }
     }, [baby])
     return (
