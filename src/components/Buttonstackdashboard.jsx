@@ -109,7 +109,7 @@ function Buttonstackdashboard() {
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
             const user = JSON.parse(sessionStorage.getItem("existingUser"))
-            const tok = JSON.parse(sessionStorage.getItem("token"))
+            const tok = sessionStorage.getItem("token")
             const baby1 = JSON.parse(sessionStorage.getItem("baby"))
             setUserDetails(user)
             setEditBabyDetails(baby1)
