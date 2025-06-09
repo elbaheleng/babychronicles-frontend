@@ -19,18 +19,15 @@ function Buttonstackdashboard() {
     const { baby, setBaby } = useContext(babyContext)
 
     const [modalAddBaby, setModalAddBaby] = useState(false)
-    const [modalEditBaby, setModalEditBaby] = useState(false)    
+    const [modalEditBaby, setModalEditBaby] = useState(false)   
+    const [token,settoken] = useState("") 
 
     const [addBabyDetails, setAddBabyDetails] = useState({
         dob: dayjs(),
         gender: "",
         name: ""
     })
-    const [editBabyDetails, setEditBabyDetails] = useState({
-        dob: dayjs(),
-        gender: "",
-        name: ""
-    })
+    const [editBabyDetails, setEditBabyDetails] = useState(baby)
     const [userDetails, setUserDetails] = useState({})
 
 
@@ -43,18 +40,10 @@ function Buttonstackdashboard() {
         handleEditBabyReset()
     }
     const handleAddBabyReset = () => {
-        setAddBabyDetails({
-            dob: dayjs(),
-            gender: "",
-            name: ""
-        })
+        setAddBabyDetails(baby)
     }
     const handleEditBabyReset = () => {
-        setEditBabyDetails({
-        dob: dayjs(),
-        gender: "",
-        name: ""
-    })
+        setEditBabyDetails(baby)
     }
     //function to add a new baby
     const handleAddBaby = async () => {
@@ -82,9 +71,7 @@ function Buttonstackdashboard() {
 
     //function to handle edit baby
     const handleEditBaby = async () => {
-        const { dob, gender, name} = editBabyDetails
-        const userMail = userDetails.email
-        const {_id} = baby
+        const {_id, dob, gender, name,userMail } = editBabyDetails
         if (dob == baby.dob) {
             const result = await editBabyDetailsApi({ _id, dob, gender, name, userMail })
             if (result.status == 200) {
@@ -118,10 +105,14 @@ function Buttonstackdashboard() {
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
             const user = JSON.parse(sessionStorage.getItem("existingUser"))
+            const tok = JSON.parse(sessionStorage.getItem("token"))
+            const baby1 = JSON.parse(sessionStorage.getItem("baby"))
             setUserDetails(user)
+            setEditBabyDetails(baby1)
+            settoken(tok)
 
         }
-    }, [])
+    }, [baby])
     return (
         <div className='m-3 flex justify-center items-center'>
             <div className='m-2'>
@@ -266,7 +257,7 @@ function Buttonstackdashboard() {
                                                         backgroundColor: amber[100],
                                                     },
                                                 }} />
-                                                <DatePicker defaultValue={dayjs()}
+                                                <DatePicker defaultValue={dayjs(editBabyDetails.dob)}
                                                     onChange={(e) => setEditBabyDetails({ ...editBabyDetails, dob: e })}
                                                     format="DD/MM/YYYY"
                                                     maxDate={dayjs()}

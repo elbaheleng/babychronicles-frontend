@@ -523,7 +523,7 @@ function Dashboard() {
   useEffect(() => {
     const baby1 = JSON.parse(localStorage.getItem("baby"))
     setBaby(baby1)
-  }, [])
+  }, [baby])
   return (
 
     <>
